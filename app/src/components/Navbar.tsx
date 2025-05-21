@@ -14,7 +14,6 @@ const Navbar: React.FC = () => {
   const navItemsRight = [
     { name: 'Blogs', path: '/blog' },
     { name: 'Events', path: '/events' },
-    { name: 'Teams', path: '/teams' },
   ];
 
   useEffect(() => {

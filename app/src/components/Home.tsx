@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, ChevronDown, Cloud } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -39,48 +40,42 @@ const Home: React.FC = () => {
   const events = [
     {
       id: 1,
-      title: 'AWS Workshop Series: Serverless Architecture',
+      title: 'Student Community Day 2024',
       date: 'March 15, 2024',
-      image: 'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     },
     {
       id: 2,
-      title: 'Cloud Summit 2024: Infrastructure as Code',
+      title: 'TAG Venture',
       date: 'February 22, 2024',
       image: 'https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     },
     {
       id: 3,
-      title: 'Hands-on Lab: AWS Lambda and API Gateway',
+      title: 'Amazon Community Day - AI/ML Edition',
       date: 'January 18, 2024',
       image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    {
-      id: 4,
-      title: 'DevOps Best Practices with AWS',
-      date: 'December 5, 2023',
-      image: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     }
   ];
 
   const blogs = [
     {
       id: 1,
-      title: 'Getting Started with AWS Lambda Functions',
-      category: 'AWS',
-      image: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      title: 'EC2 Deployment Guide',
+      category: 'Cloud Computing',
+      image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg'
     },
     {
       id: 2,
-      title: 'Building AI Applications with AWS Machine Learning Services',
-      category: 'AI Applications',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      title: 'S3 Storage Solutions',
+      category: 'Cloud Computing',
+      image: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg'
     },
     {
       id: 3,
-      title: 'Cloud Cost Optimization Strategies for Startups',
+      title: 'Lambda Functions',
       category: 'Cloud Computing',
-      image: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      image: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg'
     }
   ];
 
@@ -106,6 +101,29 @@ const Home: React.FC = () => {
       description: 'Leads the club initiatives, partnerships, and strategic planning.'
     }
   ];
+
+  const [expandedTeam, setExpandedTeam] = useState<number | null>(null);
+
+  // Team members data
+  const teamMembers = {
+    1: [
+      { name: 'John Doe', role: 'Lead Developer', image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg' },
+      { name: 'Jane Smith', role: 'Backend Developer', image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg' },
+      { name: 'Mike Johnson', role: 'Frontend Developer', image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg' }
+    ],
+    2: [
+      { name: 'Sarah Wilson', role: 'UI Designer', image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg' },
+      { name: 'Tom Brown', role: 'UX Designer', image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg' }
+    ],
+    3: [
+      { name: 'Emily Davis', role: 'PR Manager', image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg' },
+      { name: 'Chris Lee', role: 'Social Media', image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg' }
+    ],
+    4: [
+      { name: 'Alex Turner', role: 'Club President', image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg' },
+      { name: 'Lisa Chen', role: 'Vice President', image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg' }
+    ]
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -137,26 +155,27 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-black">
       <Navbar />
       
       <main className="flex-grow">
         {/* AWS Banner Section */}
         <section 
-          className="bg-gray-900 relative overflow-hidden"
+          className="relative overflow-hidden bg-gradient-to-b from-black to-blue-900"
           style={{
-            backgroundImage: 'linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(22,28,45,0.8) 100%)',
+            paddingTop: '6rem',
+            paddingBottom: '6rem',
           }}
         >
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute h-40 w-40 rounded-full bg-orange-500 opacity-10 top-20 -left-20"></div>
-            <div className="absolute h-64 w-64 rounded-full bg-blue-600 opacity-10 bottom-10 -right-20"></div>
+            <div className="absolute h-40 w-40 rounded-full bg-red-500 opacity-10 top-20 -left-20"></div>
+            <div className="absolute h-64 w-64 rounded-full bg-cyan-500 opacity-10 bottom-10 -right-20"></div>
             
             <div className="absolute inset-0 opacity-5">
               {[...Array(10)].map((_, i) => (
                 <div 
                   key={i}
-                  className="absolute h-screen w-1 bg-gradient-to-b from-blue-400 to-purple-600"
+                  className="absolute h-screen w-1 bg-gradient-to-b from-magenta-400 to-cyan-500"
                   style={{
                     left: `${i * 10}%`,
                     transform: `rotate(${20 + i * 2}deg)`,
@@ -168,10 +187,13 @@ const Home: React.FC = () => {
             </div>
           </div>
           
-          <div className="container mx-auto px-4 py-20 relative z-10">
+          <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center text-white">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Amazon Web Services
+              <div className="flex justify-center mb-6">
+                <Cloud className="w-16 h-16 text-cyan-500" />
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-cyan-500 via-magenta-500 to-yellow-500 bg-clip-text text-transparent">
+                AWS Cloud Club
               </h1>
               <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join our community of cloud enthusiasts, developers, and future architects.
@@ -179,7 +201,7 @@ const Home: React.FC = () => {
               </p>
               <a 
                 href="https://community.aws/"
-                className="inline-flex items-center px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300"
+                className="inline-flex items-center px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -190,24 +212,25 @@ const Home: React.FC = () => {
         </section>
 
         {/* Club Description */}
-        <section className="py-16 bg-white">
+        <section className="py-20 bg-blue-900">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">AWS Cloud Club</h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <h2 className="text-3xl font-bold text-white mb-6">Empowering Cloud Innovation</h2>
+              <p className="text-lg text-gray-300 mb-12">
                 We are a student-led community focused on cloud computing and AWS technologies.
                 Our mission is to help students learn cloud skills, prepare for certifications,
                 and connect with industry professionals.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
-                  { title: 'Learn', desc: 'Workshops & training sessions' },
-                  { title: 'Build', desc: 'Hands-on projects & hackathons' },
-                  { title: 'Connect', desc: 'Networking & career opportunities' }
+                  { title: 'Learn', desc: 'Workshops & training sessions', icon: '📚', color: 'from-cyan-500 to-blue-500' },
+                  { title: 'Build', desc: 'Hands-on projects & hackathons', icon: '⚡', color: 'from-yellow-500 to-red-500' },
+                  { title: 'Connect', desc: 'Networking & career opportunities', icon: '🤝', color: 'from-green-500 to-cyan-500' }
                 ].map((item, index) => (
-                  <div key={index} className="p-6 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
-                    <h3 className="text-xl font-bold mb-2 text-gray-800">{item.title}</h3>
-                    <p className="text-gray-600">{item.desc}</p>
+                  <div key={index} className={`p-6 bg-gradient-to-br ${item.color} rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1`}>
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+                    <p className="text-white/80">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -216,34 +239,37 @@ const Home: React.FC = () => {
         </section>
 
         {/* Past Events Section */}
-        <section className="py-16 bg-gray-100">
+        <section className="py-20 bg-gradient-to-b from-black to-blue-900">
           <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-10">
-              <h2 className="text-3xl font-bold text-gray-800">Past Events</h2>
-              <a 
-                href="/events" 
-                className="flex items-center text-orange-500 hover:text-orange-600 transition-colors font-medium"
+            <div className="flex justify-between items-center mb-12">
+              <h2 className="text-3xl font-bold text-white">Past Events</h2>
+              <Link 
+                to="/events" 
+                className="flex items-center text-cyan-500 hover:text-cyan-400 transition-colors font-medium"
               >
                 View all events <ArrowRight size={16} className="ml-1" />
-              </a>
+              </Link>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {events.map(event => (
-                <div key={event.id} className="group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 bg-gray-900 relative">
+                <div key={event.id} className="group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-900 to-black relative">
                   <div 
                     className="h-48 bg-cover bg-center" 
                     style={{ backgroundImage: `url(${event.image})` }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                    <p className="text-xs font-medium text-orange-400 mb-1">{event.date}</p>
-                    <h3 className="text-lg font-bold mb-2 group-hover:text-orange-400 transition-colors">{event.title}</h3>
+                    <p className="text-xs font-medium text-cyan-400 mb-1">{event.date}</p>
+                    <h3 className="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">{event.title}</h3>
                     <div className="h-0 group-hover:h-6 overflow-hidden transition-all duration-300">
-                      <button className="mt-2 flex items-center text-sm font-medium text-orange-400">
+                      <Link 
+                        to={`/events/${event.id}`}
+                        className="mt-2 flex items-center text-sm font-medium text-cyan-400"
+                      >
                         Learn more <ArrowRight size={16} className="ml-1" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -253,36 +279,39 @@ const Home: React.FC = () => {
         </section>
 
         {/* Blog Section */}
-        <section className="py-16 bg-white">
+        <section className="py-20 bg-blue-900">
           <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-10">
-              <h2 className="text-3xl font-bold text-gray-800">Latest from our Blog</h2>
-              <a 
-                href="/blog" 
-                className="flex items-center text-orange-500 hover:text-orange-600 transition-colors font-medium"
+            <div className="flex justify-between items-center mb-12">
+              <h2 className="text-3xl font-bold text-white">Latest from our Blog</h2>
+              <Link 
+                to="/blog" 
+                className="flex items-center text-cyan-500 hover:text-cyan-400 transition-colors font-medium"
               >
                 View all articles <ArrowRight size={16} className="ml-1" />
-              </a>
+              </Link>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {blogs.map(blog => (
-                <div key={blog.id} className="group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                <div key={blog.id} className="group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-black">
                   <div className="relative h-48 overflow-hidden">
                     <img 
                       src={blog.image} 
                       alt={blog.title} 
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-40 transition-all duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 group-hover:opacity-80 transition-all duration-300"></div>
                   </div>
-                  <div className="p-4 bg-white">
-                    <span className="text-xs font-medium text-orange-500 mb-2 inline-block">{blog.category}</span>
-                    <h3 className="text-lg font-bold mb-2 group-hover:text-orange-500 transition-colors">{blog.title}</h3>
-                    <div className="flex justify-end mt-2">
-                      <button className="flex items-center text-sm font-medium text-gray-600 group-hover:text-orange-500 transition-colors">
+                  <div className="p-6">
+                    <span className="text-xs font-medium text-magenta-500 mb-2 inline-block">{blog.category}</span>
+                    <h3 className="text-lg font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors">{blog.title}</h3>
+                    <div className="flex justify-end mt-4">
+                      <Link 
+                        to={`/blog/${blog.id}`}
+                        className="flex items-center text-sm font-medium text-gray-400 group-hover:text-cyan-400 transition-colors"
+                      >
                         Read more <ArrowRight size={16} className="ml-1 transform group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -292,64 +321,78 @@ const Home: React.FC = () => {
         </section>
 
         {/* Teams Section */}
-        <section className="py-16 bg-gray-100">
+        <section className="py-20 bg-gradient-to-b from-blue-900 to-black">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our Teams</h2>
-              
-              {teams.map(team => {
-                const [isHovered, setIsHovered] = useState(false);
-                
-                return (
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Our Teams</h2>
+            <div className="max-w-4xl mx-auto space-y-4">
+              {teams.map((team) => (
+                <div key={team.id} className="relative overflow-hidden rounded-lg shadow-lg">
                   <div 
-                    key={team.id}
-                    className="relative overflow-hidden rounded-lg border border-gray-200 p-6 mb-4 cursor-pointer group"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onClick={() => window.location.href = `/${team.name.toLowerCase().replace(' ', '-')}`}
+                    className="p-6 cursor-pointer flex justify-between items-center relative z-10 bg-gradient-to-r from-blue-900 to-black"
+                    onMouseEnter={() => setExpandedTeam(team.id)}
+                    onMouseLeave={() => setExpandedTeam(null)}
                   >
-                    <div 
-                      className={`absolute inset-0 bg-gray-900 transition-all duration-500 ease-out origin-left ${
-                        isHovered ? 'scale-x-100' : 'scale-x-0'
-                      }`}
-                    ></div>
-                    
-                    <div className="flex justify-between items-center relative z-10">
-                      <h3 
-                        className={`text-xl font-bold transition-colors duration-300 ${
-                          isHovered ? 'text-white' : 'text-gray-800'
-                        }`}
-                      >
-                        {team.name}
-                      </h3>
-                      <ArrowRight 
-                        className={`transform transition-all duration-300 ${
-                          isHovered ? 'translate-x-1 text-orange-400' : 'text-gray-400'
-                        }`} 
-                      />
+                    <div className="relative z-10">
+                      <h3 className={`text-xl font-semibold transition-colors duration-300 ${
+                        expandedTeam === team.id ? 'text-white' : 'text-white'
+                      }`}>{team.name}</h3>
+                      <p className={`mt-1 transition-colors duration-300 ${
+                        expandedTeam === team.id ? 'text-gray-300' : 'text-gray-400'
+                      }`}>{team.description}</p>
                     </div>
-                    
-                    <p 
-                      className={`mt-2 transition-colors duration-300 ${
-                        isHovered ? 'text-gray-300' : 'text-gray-600'
+                    <ChevronDown 
+                      className={`h-6 w-6 transition-all duration-300 ${
+                        expandedTeam === team.id 
+                          ? 'transform rotate-180 text-cyan-400' 
+                          : 'text-gray-400'
                       }`}
-                    >
-                      {team.description}
-                    </p>
+                    />
                   </div>
-                );
-              })}
+                  
+                  {/* Blackening effect background */}
+                  <div 
+                    className={`absolute inset-0 bg-gradient-to-r from-black to-blue-900 transition-all duration-500 ease-out origin-left ${
+                      expandedTeam === team.id ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                  ></div>
+                  
+                  {/* Team members content */}
+                  <div 
+                    className={`overflow-hidden transition-all duration-500 ${
+                      expandedTeam === team.id ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="px-6 pb-6 relative z-10">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                        {teamMembers[team.id as keyof typeof teamMembers]?.map((member, index) => (
+                          <div key={index} className="bg-gradient-to-br from-blue-900 to-black rounded-lg p-4 flex items-center space-x-4 border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300">
+                            <img 
+                              src={member.image} 
+                              alt={member.name}
+                              className="w-16 h-16 rounded-full object-cover border-2 border-cyan-500"
+                            />
+                            <div>
+                              <h4 className="font-semibold text-white">{member.name}</h4>
+                              <p className="text-sm text-gray-400">{member.role}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Gallery Section */}
-        <section className="py-16 bg-white">
+        <section className="py-20 bg-blue-900">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-gray-800 mb-10 text-center">Club Gallery</h2>
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">Club Gallery</h2>
             
             <div className="relative max-w-4xl mx-auto">
-              <div className="overflow-hidden rounded-lg shadow-lg h-96 relative">
+              <div className="overflow-hidden rounded-lg shadow-xl h-96 relative">
                 <div 
                   className="flex transition-transform duration-500 ease-in-out h-full"
                   style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -365,7 +408,7 @@ const Home: React.FC = () => {
                   ))}
                 </div>
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
                 
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <h3 className="text-xl font-bold">{images[currentIndex].alt}</h3>
@@ -373,7 +416,7 @@ const Home: React.FC = () => {
                 
                 <button 
                   onClick={handlePrev}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-colors"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-80 hover:bg-opacity-90 text-white p-2 rounded-full transition-colors"
                   aria-label="Previous image"
                 >
                   <ChevronLeft size={24} />
@@ -381,22 +424,22 @@ const Home: React.FC = () => {
                 
                 <button 
                   onClick={handleNext}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-colors"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-80 hover:bg-opacity-90 text-white p-2 rounded-full transition-colors"
                   aria-label="Next image"
                 >
                   <ChevronRight size={24} />
                 </button>
               </div>
               
-              <div className="flex justify-center mt-4 space-x-2">
+              <div className="flex justify-center mt-6 space-x-2">
                 {images.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
                       index === currentIndex 
-                        ? 'bg-orange-500 scale-125' 
-                        : 'bg-gray-300 hover:bg-gray-400'
+                        ? 'bg-cyan-500 scale-125' 
+                        : 'bg-gray-600 hover:bg-gray-500'
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />

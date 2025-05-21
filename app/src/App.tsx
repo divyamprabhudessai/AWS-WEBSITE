@@ -1,26 +1,31 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import Blog from './components/Blog';
-// import Events from './components/Events';
+import BlogDetail from './components/BlogDetail';
+import Events from './components/Events';
+import EventDetail from './components/EventDetail';
 // import Teams from './components/Teams';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
-        {/* <Route path="/events" element={<Events />} /> */}
-        {/* <Route path="/teams" element={<Teams />} /> */}
+        <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetail />} />
+    
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
-}
+};
 
 export default App;
