@@ -1,0 +1,90 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Tech Team",
+      "description": "Responsible for technical workshops, coding sessions, and hackathons.",
+      "members": [
+        { "name": "Divyam Prabhudesai", "role": "Tech Team Lead", "image": "/team-images/tech-team/Divyam_Desai.jpg" },
+        { "name": "Kartik Sakhuja", "role": "Tech Team Member", "image": "/team-images/tech-team/Kartik_Sakhuja.jpg" },
+        { "name": "Sanyakta Bhatt", "role": "Tech Team Member", "image": "/team-images/tech-team/Sanyakta_Bhatt.jpg" },
+        { "name": "Aditya Patil", "role": "Tech Team Member", "image": "/team-images/tech-team/Aditya_Patil.jpg" },
+        { "name": "Aditya Borhade", "role": "Tech Team Member", "image": "/team-images/tech-team/Aditya_Borhade.jpg" },
+        { "name": "Abhimanyu Singh", "role": "Tech Team Member", "image": "/team-images/tech-team/Abhimanyu_Singh.jpg" },
+        { "name": "Ayman Velani", "role": "Tech Team Member", "image": "/team-images/tech-team/Ayman_Velani.jpg" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Social Media & Design Team",
+      "description": "Manages Social Media Handles and crafts visual content, UI/UX designs, and marketing materials.",
+      "members": [
+        { "name": "Tejas Naukudkar", "role": "Social Media & Design Lead", "image": "/team-images/design-and-sm/Tejas_Naukudkar.jpg" },
+        { "name": "Rachit Kumar", "role": "Social Media & Design Member", "image": "/team-images/design-and-sm/Rachit_Kumar.jpg" },
+        { "name": "Himanshu Shirbhate", "role": "Social Media & Design Member", "image": "/team-images/design-and-sm/Himanshu_Shirbhate.jpg" },
+        { "name": "Omkar Gaikwad", "role": "Social Media & Design Member", "image": "/team-images/design-and-sm/Omkar_Gaikwad.jpg" },
+        { "name": "Om Jadhav", "role": "Social Media & Design Member", "image": "/team-images/design-and-sm/Om_Jadhav.jpg" },
+        { "name": "Rushikesh Patil", "role": "Social Media & Design Member", "image": "/team-images/design-and-sm/Rushikesh_Patil.jpg" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "PR & Sponsorship Team",
+      "description": "Handles communication, social media, and community engagement.",
+      "members": [
+        { "name": "Gourav Singar", "role": "PR & Sponsorship Lead", "image": "/team-images/pr-and-sponsorship/Gourav_Singar.jpg" },
+        { "name": "Shikhar Sharma", "role": "PR & Sponsorship Member", "image": "/team-images/pr-and-sponsorship/Shikhar_Sharma.jpg" },
+        { "name": "Subhiksha Ram", "role": "PR and Sponsorship Member", "image": "/team-images/pr-and-sponsorship/Subhiksha_Ram.jpg" },
+        { "name": "Aryan Dhumbre", "role": "PR and Sponsorship Member", "image": "/team-images/pr-and-sponsorship/Aryan_Dhumbre.jpg" },
+        { "name": "Naveen Kumar", "role": "PR and Sponsorship Member", "image": "/team-images/pr-and-sponsorship/Naveen_Kumar.jpg" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Event Logistics & Management Team",
+      "description": "Manages event logistics, coordination, and management.",
+      "members": [
+        { "name": "Aryan Phule", "role": "Event Logistics & Management Lead", "image": "/team-images/event-logistics-and-management/Aryan_Phule.jpg" },
+        { "name": "Chaitanya Rastogi", "role": "Event Logistics & Management Member", "image": "/team-images/event-logistics-and-management/Chaitanya_Rastogi.jpg" },
+        { "name": "Virendrapratap Karad", "role": "Event Logistics & Management Member", "image": "/team-images/event-logistics-and-management/Virendrapratap_Karad.jpg" },
+        { "name": "Giriraj Baheti", "role": "Event Logistics & Management Member", "image": "/team-images/event-logistics-and-management/Giriraj_Baheti.jpg" },
+        { "name": "Shweta Shete", "role": "Event Logistics & Management Member", "image": "/team-images/event-logistics-and-management/Shweta_Shete.jpg" },
+        { "name": "Ayush Pedwal", "role": "Event Logistics & Management Member", "image": "/team-images/event-logistics-and-management/Ayush_Pedwal.jpg" },
+        { "name": "Malavika Unnikrishnan", "role": "Event Logistics & Management Member", "image": "/team-images/event-logistics-and-management/Malavika_Unnikrishnan.jpg" }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Research Paper Team",
+      "description": "Focuses on research, academic publications, and technical documentation.",
+      "members": [
+        { "name": "Tahoor Khan", "role": "Research Paper Lead", "image": "/team-images/research-paper/Tahoor_Khan.jpg" },
+        { "name": "Soham Zope", "role": "Research Paper Member", "image": "/team-images/research-paper/Soham_Zope.jpg" },
+        { "name": "Paaneri Naik", "role": "Research Paper Member", "image": "/team-images/research-paper/Paaneri_Naik.jpg" }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Documentation Team",
+      "description": "Manages technical documentation, guides, and knowledge base.",
+      "members": [
+        { "name": "Aanaya Verma", "role": "Documentation Lead", "image": "/team-images/documentation-team/Aanaya_Verma.jpg" },
+        { "name": "Deepesh Patil", "role": "Documentation Member", "image": "/team-images/documentation-team/Deepesh_Patil.jpg" },
+        { "name": "Vishvajit Singh", "role": "Documentation Member", "image": "/team-images/documentation-team/Vishvajit_Singh.jpg" },
+        { "name": "Samarth Agarwal", "role": "Documentation Member", "image": "/team-images/documentation-team/Samarth_Agarwal.jpg" }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Core Team",
+      "description": "Leads the club initiatives, partnerships, and strategic planning.",
+      "members": [
+        { "name": "Parth Shah", "role": "Club President", "image": "/team-images/core-team/Parth_Shah.jpg" },
+        { "name": "Sidkumar Pawar", "role": "Club Vice President", "image": "/team-images/core-team/Sidkumar_Pawar.jpg" },
+        { "name": "Shmabhavi Mishra", "role": "Club Treasurer", "image": "/team-images/core-team/Shambhavi_Mishra.jpg" },
+        { "name": "Tanay Pujara", "role": "Club Secretary", "image": "/team-images/core-team/Tanay_Pujara.jpg" },
+        { "name": "Arya Shende", "role": "Club Community Manager", "image": "/team-images/core-team/Arya_Shende.jpg" }
+      ]
+    }
+  ]
+} 

@@ -4,6 +4,60 @@ import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+// Image mapping object
+const teamImages: { [key: string]: string } = {
+  'Abhimanyu-singh.jpg': '/team-images/tech-team/Abhimanyu-singh.jpg',
+  'Aditya-Patil.jpg': '/team-images/tech-team/Aditya-Patil.jpg',
+  'Aditya-Borhade.jpg': '/team-images/tech-team/Aditya-Borhade.jpg',
+  'Aryan-Dhumbre.jpg': '/team-images/pr-and-sponsorship/Aryan-Dhumbre.jpg',
+  'Ayman-Velani.jpg': '/team-images/tech-team/Ayman-Velani.jpg',
+  'Divyam-Desai.jpg': '/team-images/tech-team/Divyam-Desai.jpg',
+  'Gourav-Singar.jpg': '/team-images/pr-and-sponsorship/Gourav-Singar.jpg',
+  'Shikhar-Sharma.jpg': '/team-images/pr-and-sponsorship/Shikhar-Sharma.jpg',
+  'Kartik-Sakhuja.jpg': '/team-images/tech-team/Kartik-Sakhuja.jpg',
+  'Naveen-Kumar.jpg': '/team-images/pr-and-sponsorship/Naveen-Kumar.jpg',
+  'Om-Jadhav.jpg': '/team-images/design-and-sm/Om-Jadhav.jpg',
+  'Himanshu-Shirbhate.jpg': '/team-images/design-and-sm/Himanshu-Shirbhate.jpg',
+  'Rushikesh-Patil.jpg': '/team-images/design-and-sm/Rushikesh-Patil.jpg',
+  'sanyakta.jpg': '/team-images/tech-team/sanyakta.jpg',
+  'Subhiksha-Ram.jpg': '/team-images/pr-and-sponsorship/Subhiksha-Ram.jpg',
+  'Rachit-Kumar.jpg': '/team-images/design-and-sm/Rachit-Kumar.jpg',
+  'Tejas-Naukudkar.jpg': '/team-images/design-and-sm/Tejas-Naukudkar.jpg',
+  'Omkar-Gaikwad.jpg': '/team-images/design-and-sm/Omkar-Gaikwad.jpg',
+  'om.jpg': '/team-images/design-and-sm/om.jpg',
+  'Aryan-Phule.jpg': '/team-images/event-logistics-and-management/Aryan-Phule.jpg',
+  'Chaitanya-Rastogi.jpg': '/team-images/event-logistics-and-management/Chaitanya-Rastogi.jpg',
+  'Virendra-Karad.jpg': '/team-images/event-logistics-and-management/Virendra-Karad.jpg',
+  'giriraj.jpg': '/team-images/event-logistics-and-management/giriraj.jpg',
+  'shweta.jpg': '/team-images/event-logistics-and-management/shweta.jpg',
+  'ayush.jpg': '/team-images/event-logistics-and-management/ayush.jpg',
+  'Malavika-Unnikrishnan.jpg': '/team-images/event-logistics-and-management/Malavika-Unnikrishnan.jpg',
+  'Parth-Shah.jpg': '/team-images/core-team/Parth-Shah.jpg',
+  'Sidkumar-Pawar.jpg': '/team-images/core-team/Sidkumar-Pawar.jpg',
+  'Shmabhavi-Mishra.jpg': '/team-images/core-team/Shambhavi-Mishra.jpg',
+  'Tanay-Pujara.jpg': '/team-images/core-team/Tanay-Pujara.jpg',
+  'Arya-Shende.jpg': '/team-images/core-team/Arya-Shende.jpg',
+  'Lisa-Alex.jpg': '/team-images/research-paper/Lisa-Alex.jpg',
+  'Alex-John.jpg': '/team-images/research-paper/Alex-John.jpg',
+  'Aanaya-Verma.jpg': '/team-images/documentation/Aanaya-Verma.jpg',
+  'Deepesh-Patil.jpg': '/team-images/documentation/Deepesh-Patil.jpg',
+  'Vishvajit-Singh.jpg': '/team-images/documentation/Vishvajit-Singh.jpg',
+  'Samarth-Agarwal.jpg': '/team-images/documentation/Samarth-Agarwal.jpg'
+};
+
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface Team {
+  id: number;
+  name: string;
+  description: string;
+  members: TeamMember[];
+}
+
 const Home: React.FC = () => {
   // Gallery state and functions
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -79,57 +133,21 @@ const Home: React.FC = () => {
     }
   ];
 
-  const teams = [
-    {
-      id: 1,
-      name: 'Tech Team',
-      description: 'Responsible for technical workshops, coding sessions, and hackathons.'
-    },
-    {
-      id: 2,
-      name: 'Design Team',
-      description: 'Creates visual content, UI/UX designs, and marketing materials.'
-    },
-    {
-      id: 3,
-      name: 'PR Team',
-      description: 'Handles communication, social media, and community engagement.'
-    },
-    {
-      id: 4,
-      name: 'Core Team',
-      description: 'Leads the club initiatives, partnerships, and strategic planning.'
-    }
-  ];
-
+  // Fetch teams from backend
+  const [teams, setTeams] = useState<any[]>([]);
   const [expandedTeam, setExpandedTeam] = useState<number | null>(null);
 
-  // Team members data
-  const teamMembers = {
-    1: [
-      { name: 'John Doe', role: 'Lead Developer', image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg' },
-      { name: 'Jane Smith', role: 'Backend Developer', image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg' },
-      { name: 'Mike Johnson', role: 'Frontend Developer', image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg' }
-    ],
-    2: [
-      { name: 'Sarah Wilson', role: 'UI Designer', image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg' },
-      { name: 'Tom Brown', role: 'UX Designer', image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg' }
-    ],
-    3: [
-      { name: 'Emily Davis', role: 'PR Manager', image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg' },
-      { name: 'Chris Lee', role: 'Social Media', image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg' }
-    ],
-    4: [
-      { name: 'Alex Turner', role: 'Club President', image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg' },
-      { name: 'Lisa Chen', role: 'Vice President', image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg' }
-    ]
-  };
+  useEffect(() => {
+    fetch('http://localhost:3000/api/teams')
+      .then(res => res.json())
+      .then(data => setTeams(data))
+      .catch(err => console.error('Failed to fetch teams:', err));
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
     }, 5000);
-    
     return () => clearInterval(interval);
   }, [currentIndex]);
 
@@ -327,7 +345,7 @@ const Home: React.FC = () => {
             <div className="max-w-4xl mx-auto space-y-4">
               {teams.map((team) => (
                 <div key={team.id} className="relative overflow-hidden rounded-lg shadow-lg">
-                  <div 
+                  <div
                     className="p-6 cursor-pointer flex justify-between items-center relative z-10 bg-gradient-to-r from-blue-900 to-black"
                     onMouseEnter={() => setExpandedTeam(team.id)}
                     onMouseLeave={() => setExpandedTeam(null)}
@@ -340,34 +358,32 @@ const Home: React.FC = () => {
                         expandedTeam === team.id ? 'text-gray-300' : 'text-gray-400'
                       }`}>{team.description}</p>
                     </div>
-                    <ChevronDown 
+                    <ChevronDown
                       className={`h-6 w-6 transition-all duration-300 ${
-                        expandedTeam === team.id 
-                          ? 'transform rotate-180 text-cyan-400' 
+                        expandedTeam === team.id
+                          ? 'transform rotate-180 text-cyan-400'
                           : 'text-gray-400'
                       }`}
                     />
                   </div>
-                  
                   {/* Blackening effect background */}
-                  <div 
+                  <div
                     className={`absolute inset-0 bg-gradient-to-r from-black to-blue-900 transition-all duration-500 ease-out origin-left ${
                       expandedTeam === team.id ? 'scale-x-100' : 'scale-x-0'
                     }`}
                   ></div>
-                  
                   {/* Team members content */}
-                  <div 
+                  <div
                     className={`overflow-hidden transition-all duration-500 ${
                       expandedTeam === team.id ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
                     <div className="px-6 pb-6 relative z-10">
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                        {teamMembers[team.id as keyof typeof teamMembers]?.map((member, index) => (
+                        {team.members && team.members.map((member: any, index: number) => (
                           <div key={index} className="bg-gradient-to-br from-blue-900 to-black rounded-lg p-4 flex items-center space-x-4 border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-300">
-                            <img 
-                              src={member.image} 
+                            <img
+                              src={member.image}
                               alt={member.name}
                               className="w-16 h-16 rounded-full object-cover border-2 border-cyan-500"
                             />
