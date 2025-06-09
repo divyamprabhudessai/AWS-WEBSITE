@@ -73,18 +73,6 @@
         { "name": "Vishvajit Singh", "role": "Documentation Member", "image": "/team-images/documentation-team/Vishvajit_Singh.jpg" },
         { "name": "Samarth Agarwal", "role": "Documentation Member", "image": "/team-images/documentation-team/Samarth_Agarwal.jpg" }
       ]
-    },
-    {
-      "id": 7,
-      "name": "Core Team",
-      "description": "Leads the club initiatives, partnerships, and strategic planning.",
-      "members": [
-        { "name": "Parth Shah", "role": "Club President", "image": "/team-images/core-team/Parth_Shah.jpg" },
-        { "name": "Sidkumar Pawar", "role": "Club Vice President", "image": "/team-images/core-team/Sidkumar_Pawar.jpg" },
-        { "name": "Shmabhavi Mishra", "role": "Club Treasurer", "image": "/team-images/core-team/Shambhavi_Mishra.jpg" },
-        { "name": "Tanay Pujara", "role": "Club Secretary", "image": "/team-images/core-team/Tanay_Pujara.jpg" },
-        { "name": "Arya Shende", "role": "Club Community Manager", "image": "/team-images/core-team/Arya_Shende.jpg" }
-      ]
     }
   ]
 } 

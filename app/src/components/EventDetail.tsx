@@ -1,79 +1,104 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowLeft, FileText } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-type EventId = '1' | '2' | '3';
+const API_BASE_URL = 'http://localhost:3000/api';
+
+interface EventReport {
+  filename: string;
+  path: string;
+  size: string;
+  lastUpdated: string;
+}
+
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+  image: string;
+  category: string;
+  summary: string;
+  highlights: string[];
+  report: EventReport;
+}
 
 const EventDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  
-  // In a real application, this would come from an API or database
-  const events = {
-    '1': {
-      title: 'Student Community Day 2024',
-      date: 'March 15, 2024',
-      location: 'Virtual',
-      description: 'A day dedicated to bringing together student communities from across the globe to learn, share, and grow together.',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      category: 'Community',
-      summary: `The Student Community Day 2024 was a landmark event that brought together AWS Cloud Clubs from around the world. 
-                The event featured keynote speeches from AWS leaders, technical workshops, and networking sessions. 
-                Participants had the opportunity to learn about the latest AWS services, best practices in cloud computing, 
-                and career opportunities in the tech industry.`,
-      highlights: [
-        'Keynote speeches from AWS leaders',
-        'Technical workshops on AWS services',
-        'Networking sessions with industry professionals',
-        'Career development discussions',
-        'Hands-on labs and demonstrations'
-      ],
-      documentationUrl: '/docs/student-community-day-2024.pdf'
-    },
-    '2': {
-      title: 'TAG Venture',
-      date: 'February 22, 2024',
-      location: 'MIT ADT University',
-      description: 'An innovative event focused on technology, entrepreneurship, and cloud computing, bringing together students and industry experts.',
-      image: 'https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      category: 'Innovation',
-      summary: `TAG Venture was a unique event that combined technology, entrepreneurship, and cloud computing. 
-                Hosted at MIT ADT University, the event brought together students, entrepreneurs, and industry experts 
-                to explore innovative solutions and business opportunities in the cloud space.`,
-      highlights: [
-        'Startup pitch sessions',
-        'Cloud technology workshops',
-        'Entrepreneurship panel discussions',
-        'Networking with industry leaders',
-        'Innovation challenges'
-      ],
-      documentationUrl: '/docs/tag-venture-2024.pdf'
-    },
-    '3': {
-      title: 'Amazon Community Day - AI/ML Edition',
-      date: 'January 18, 2024',
-      location: 'AWS User Group Pune',
-      description: 'A specialized event focusing on Artificial Intelligence and Machine Learning, featuring workshops, talks, and hands-on sessions.',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      category: 'AI/ML',
-      summary: `The Amazon Community Day - AI/ML Edition was a specialized event focused on artificial intelligence and machine learning. 
-                Hosted by AWS User Group Pune, the event featured expert talks, hands-on workshops, and demonstrations of 
-                cutting-edge AI/ML applications using AWS services.`,
-      highlights: [
-        'AI/ML expert talks',
-        'Hands-on workshops with SageMaker',
-        'Real-world AI/ML use cases',
-        'Networking with AI/ML professionals',
-        'Career opportunities in AI/ML'
-      ],
-      documentationUrl: '/docs/community-day-ai-ml-2024.pdf'
+  const [event, setEvent] = useState<Event | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/events/${id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch event details');
+        }
+        const data = await response.json();
+        setEvent(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchEvent();
+    }
+  }, [id]);
+
+  const handleDownloadReport = async () => {
+    if (!event) return;
+    
+    try {
+      const response = await fetch(`${API_BASE_URL}/events/${event.id}/report`);
+      if (!response.ok) {
+        throw new Error('Failed to download report');
+      }
+      
+      // Create a blob from the response
+      const blob = await response.blob();
+      
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+      
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = event.report.filename;
+      
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Clean up the URL
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Error downloading report:', err);
+      alert('Failed to download report. Please try again later.');
     }
   };
 
-  const event = id ? events[id as EventId] : undefined;
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-black">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-white text-xl">Loading event details...</div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-  if (!event) {
+  if (error || !event) {
     return (
       <div className="flex flex-col min-h-screen bg-black">
         <Navbar />
@@ -156,17 +181,15 @@ const EventDetail: React.FC = () => {
                   <div className="mt-12 p-6 bg-gradient-to-br from-blue-900 to-black rounded-lg">
                     <h2 className="text-2xl font-bold mb-4">Event Documentation</h2>
                     <p className="text-gray-300 mb-4">
-                      Download the complete event documentation prepared by our documentation team.
+                      Download the complete event documentation ({event.report.size}, last updated {event.report.lastUpdated}).
                     </p>
-                    <a 
-                      href={event.documentationUrl}
+                    <button 
+                      onClick={handleDownloadReport}
                       className="inline-flex items-center px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300"
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       <FileText size={20} className="mr-2" />
                       Download Documentation
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

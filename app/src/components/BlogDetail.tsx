@@ -1,69 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-type BlogId = '1' | '2' | '3';
+interface BlogPost {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  content: string;
+  author: string;
+  date: string;
+  readTime: string;
+  difficulty: string;
+  tags: string[];
+  relatedPosts: string[];
+}
+
+const API_BASE_URL = 'http://localhost:3000/api';
 
 const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  
-  // In a real application, this would come from an API or database
-  const blogs = {
-    '1': {
-      title: 'Getting Started with AWS Lambda Functions',
-      category: 'AWS',
-      image: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      content: `AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. 
-                In this tutorial, we'll explore how to create and deploy your first Lambda function.
-                
-                We'll cover:
-                - Setting up your AWS account
-                - Creating your first Lambda function
-                - Understanding triggers and events
-                - Best practices for Lambda development
-                - Monitoring and debugging
-                
-                By the end of this tutorial, you'll have a solid understanding of how to use AWS Lambda in your applications.`
-    },
-    '2': {
-      title: 'Building AI Applications with AWS Machine Learning Services',
-      category: 'AI Applications',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      content: `AWS provides a comprehensive suite of machine learning services that make it easy to build, train, and deploy AI applications.
-                In this guide, we'll explore how to leverage these services to create powerful AI solutions.
-                
-                Topics covered:
-                - Amazon SageMaker for model training
-                - Amazon Rekognition for image analysis
-                - Amazon Comprehend for text analysis
-                - Best practices for AI application development
-                - Cost optimization strategies
-                
-                Learn how to integrate these services into your applications and create intelligent solutions.`
-    },
-    '3': {
-      title: 'Cloud Cost Optimization Strategies for Startups',
-      category: 'Cloud Computing',
-      image: 'https://images.pexels.com/photos/5380642/pexels-photo-5380642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      content: `Managing cloud costs effectively is crucial for startups. In this article, we'll explore various strategies to optimize
-                your AWS spending while maintaining performance and scalability.
-                
-                Key areas covered:
-                - Right-sizing your resources
-                - Using reserved instances
-                - Implementing auto-scaling
-                - Monitoring and analytics
-                - Cost allocation and budgeting
-                
-                Discover how to make the most of your cloud budget and avoid common cost pitfalls.`
-    }
-  };
+  const [blog, setBlog] = useState<BlogPost | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const blog = id ? blogs[id as BlogId] : undefined;
+  useEffect(() => {
+    const fetchBlogPost = async () => {
+      if (!id) return;
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/blog/posts/${id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch blog post');
+        }
+        const data = await response.json();
+        setBlog(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred while fetching data');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!blog) {
+    fetchBlogPost();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-black">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-white text-2xl">Loading...</div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error || !blog) {
     return (
       <div className="flex flex-col min-h-screen bg-black">
         <Navbar />

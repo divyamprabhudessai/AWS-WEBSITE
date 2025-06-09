@@ -1,37 +1,67 @@
-import React, { useState } from 'react';
-import { Mail, Linkedin, Github, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Linkedin, Github, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+  email: string;
+  linkedin: string;
+  github: string;
+  fiverr?: string;
+  description: string;
+  experience?: { title: string; details: string }[];
+  skills?: string[];
+}
+
+// Custom Fiverr Icon Component
+const FiverrIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="text-gray-200 hover:text-cyan-400 transition-colors"
+  >
+    <path
+      d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"
+      fill="currentColor"
+    />
+    <path
+      d="M8.5 14.5l2-4.5 2 4.5M13 10v4M15.5 10v4"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const About: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [coreTeam, setCoreTeam] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState<'next' | 'prev'>('next');
 
-  const coreTeam = [
-    {
-      name: "John Doe",
-      role: "Club Lead",
-      image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
-      email: "john.doe@example.com",
-      linkedin: "https://linkedin.com/in/johndoe",
-      github: "https://github.com/johndoe"
-    },
-    {
-      name: "Jane Smith",
-      role: "Technical Lead",
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-      email: "jane.smith@example.com",
-      linkedin: "https://linkedin.com/in/janesmith",
-      github: "https://github.com/janesmith"
-    },
-    {
-      name: "Mike Johnson",
-      role: "Event Coordinator",
-      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
-      email: "mike.johnson@example.com",
-      linkedin: "https://linkedin.com/in/mikejohnson",
-      github: "https://github.com/mikejohnson"
-    }
-  ];
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/core-team');
+        const data = await response.json();
+        setCoreTeam(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching team data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchTeamData();
+  }, []);
 
   const values = [
     {
@@ -56,13 +86,26 @@ const About: React.FC = () => {
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % coreTeam.length);
+  const handleSlide = (dir: 'next' | 'prev') => {
+    setDirection(dir);
+    setCurrentSlide((prev) =>
+      dir === 'next'
+        ? (prev + 1) % coreTeam.length
+        : (prev - 1 + coreTeam.length) % coreTeam.length
+    );
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + coreTeam.length) % coreTeam.length);
-  };
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-black">
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center">
+          <div className="text-white text-xl">Loading team data...</div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
@@ -101,68 +144,67 @@ const About: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
               Core Team
             </h2>
-            <div className="relative max-w-4xl mx-auto">
-              <div className="relative h-[400px] overflow-hidden rounded-lg">
-                {coreTeam.map((member, index) => (
-                  <div 
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-500 ${
-                      index === currentSlide ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    <div className="bg-gradient-to-br from-blue-900 to-black rounded-lg overflow-hidden h-full">
-                      <div className="relative h-64">
-                        <img 
-                          src={member.image} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90"></div>
-                        <div className="absolute bottom-6 left-6">
-                          <h3 className="text-white text-2xl font-semibold">{member.name}</h3>
-                          <p className="text-cyan-400">{member.role}</p>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <div className="flex space-x-4 justify-center">
-                          <a href={`mailto:${member.email}`} className="text-gray-400 hover:text-cyan-400 transition-colors">
-                            <Mail size={20} />
-                          </a>
-                          <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors">
-                            <Linkedin size={20} />
-                          </a>
-                          <a href={member.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors">
-                            <Github size={20} />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="flex justify-center items-center gap-6 relative min-h-[420px]">
               <button 
-                onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-cyan-500 p-2 rounded-full hover:bg-cyan-600 transition-colors"
+                onClick={() => handleSlide('prev')}
+                className="bg-cyan-500 p-2 rounded-full hover:bg-cyan-600 transition-colors z-20"
               >
                 <ChevronLeft className="h-6 w-6 text-white" />
               </button>
+              
+              {/* Main Profile Card with Morph Animation (Photo large, shrinks and moves to top center on hover) */}
+              <article className="relative w-[340px] min-h-[420px] md:w-[420px] md:min-h-[520px] group bg-gradient-to-br from-blue-900 to-black rounded-2xl shadow-xl p-8 transition-all duration-500 overflow-hidden cursor-pointer flex items-center justify-center">
+                <div className="relative w-full h-full flex flex-col items-center justify-center">
+                  {/* Profile Image - perfectly centered by default, moves to top center on hover */}
+                  <img
+                    src={coreTeam[currentSlide]?.image}
+                    alt={coreTeam[currentSlide]?.name}
+                    className="absolute left-1/2 w-40 h-40 md:w-56 md:h-56 rounded-full object-cover border-4 border-cyan-500 shadow-lg bg-white transition-all duration-500 -translate-x-1/2 top-1/2 -translate-y-1/2 group-hover:w-24 group-hover:h-24 group-hover:top-8 group-hover:-translate-y-0 group-hover:scale-90"
+                  />
+                  {/* Card Content - hidden by default, revealed on hover */}
+                  <div className="flex flex-col items-center w-full opacity-0 pointer-events-none translate-y-8 transition-all duration-500 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 mt-0 group-hover:mt-[140px]">
+                    <h3 className="text-white text-2xl font-bold mb-2 text-center">{coreTeam[currentSlide]?.name}</h3>
+                    <p className="text-cyan-400 mb-4 text-center">{coreTeam[currentSlide]?.role}</p>
+                    <p className="text-gray-300 mb-6 text-center text-sm md:text-base max-h-[120px] overflow-y-auto">{coreTeam[currentSlide]?.description}</p>
+                    <div className="flex space-x-6 mb-6 justify-center">
+                      <a href={`mailto:${coreTeam[currentSlide]?.email}`} className="text-gray-200 hover:text-cyan-400 transition-colors" target="_blank" rel="noopener noreferrer">
+                        <Mail size={24} />
+                      </a>
+                      <a href={coreTeam[currentSlide]?.linkedin} className="text-gray-200 hover:text-cyan-400 transition-colors" target="_blank" rel="noopener noreferrer">
+                        <Linkedin size={24} />
+                      </a>
+                      <a href={coreTeam[currentSlide]?.github} className="text-gray-200 hover:text-cyan-400 transition-colors" target="_blank" rel="noopener noreferrer">
+                        <Github size={24} />
+                      </a>
+                    </div>
+                    <div className="flex flex-wrap gap-2 justify-center mb-4">
+                      {coreTeam[currentSlide]?.skills?.map((skill, i) => (
+                        <span key={i} className="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </article>
+
               <button 
-                onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-cyan-500 p-2 rounded-full hover:bg-cyan-600 transition-colors"
+                onClick={() => handleSlide('next')}
+                className="bg-cyan-500 p-2 rounded-full hover:bg-cyan-600 transition-colors z-20"
               >
                 <ChevronRight className="h-6 w-6 text-white" />
               </button>
-              <div className="flex justify-center mt-6 space-x-2">
-                {coreTeam.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      index === currentSlide ? 'bg-cyan-500' : 'bg-gray-600'
-                    }`}
-                  />
-                ))}
-              </div>
+            </div>
+            <div className="flex justify-center mt-6 space-x-2">
+              {coreTeam.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentSlide ? 'bg-cyan-500' : 'bg-gray-600'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </section>

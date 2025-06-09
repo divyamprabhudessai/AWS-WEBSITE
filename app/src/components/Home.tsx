@@ -62,34 +62,7 @@ const Home: React.FC = () => {
   // Gallery state and functions
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const images = [
-    {
-      id: 1,
-      url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      alt: 'AWS Cloud Club team meeting'
-    },
-    {
-      id: 2,
-      url: 'https://images.pexels.com/photos/7579203/pexels-photo-7579203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      alt: 'Workshop session'
-    },
-    {
-      id: 3,
-      url: 'https://images.pexels.com/photos/3182753/pexels-photo-3182753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      alt: 'Hackathon participants'
-    },
-    {
-      id: 4,
-      url: 'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      alt: 'Team celebration'
-    },
-    {
-      id: 5,
-      url: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      alt: 'Tech talk session'
-    }
-  ];
+  const [galleryImages, setGalleryImages] = useState<any[]>([]);
 
   const events = [
     {
@@ -133,6 +106,14 @@ const Home: React.FC = () => {
     }
   ];
 
+  // Fetch gallery images from backend
+  useEffect(() => {
+    fetch('http://localhost:3000/api/gallery')
+      .then(res => res.json())
+      .then(data => setGalleryImages(data))
+      .catch(err => console.error('Failed to fetch gallery images:', err));
+  }, []);
+
   // Fetch teams from backend
   const [teams, setTeams] = useState<any[]>([]);
   const [expandedTeam, setExpandedTeam] = useState<number | null>(null);
@@ -154,14 +135,14 @@ const Home: React.FC = () => {
   const handlePrev = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
+    setCurrentIndex(prev => (prev === 0 ? galleryImages.length - 1 : prev - 1));
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
   const handleNext = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrentIndex(prev => (prev === images.length - 1 ? 0 : prev + 1));
+    setCurrentIndex(prev => (prev === galleryImages.length - 1 ? 0 : prev + 1));
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
@@ -413,7 +394,7 @@ const Home: React.FC = () => {
                   className="flex transition-transform duration-500 ease-in-out h-full"
                   style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 >
-                  {images.map(image => (
+                  {galleryImages.map(image => (
                     <div key={image.id} className="w-full flex-shrink-0">
                       <img 
                         src={image.url} 
@@ -427,7 +408,8 @@ const Home: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
                 
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <h3 className="text-xl font-bold">{images[currentIndex].alt}</h3>
+                  <h3 className="text-xl font-bold">{galleryImages[currentIndex]?.alt}</h3>
+                  <p className="text-sm text-gray-300 mt-2">{galleryImages[currentIndex]?.description}</p>
                 </div>
                 
                 <button 
@@ -448,7 +430,7 @@ const Home: React.FC = () => {
               </div>
               
               <div className="flex justify-center mt-6 space-x-2">
-                {images.map((_, index) => (
+                {galleryImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}

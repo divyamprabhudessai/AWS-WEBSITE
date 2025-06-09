@@ -7,9 +7,9 @@ import Home from './components/Home';
 import About from './components/About';
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
+import BlogPost from './components/BlogPost';
 import Events from './components/Events';
 import EventDetail from './components/EventDetail';
-// import Teams from './components/Teams';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +20,7 @@ const App: React.FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/blog/post/:id" element={<BlogPost />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetail />} />
     
