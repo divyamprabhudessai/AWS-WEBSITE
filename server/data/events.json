@@ -1,0 +1,73 @@
+{
+  "events": [
+    {
+      "id": "1",
+      "title": "Student Community Day 2024",
+      "date": "March 15, 2024",
+      "location": "Virtual",
+      "description": "A day dedicated to bringing together student communities from across the globe to learn, share, and grow together.",
+      "image": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "category": "Community",
+      "summary": "The Student Community Day 2024 was a landmark event that brought together AWS Cloud Clubs from around the world. The event featured keynote speeches from AWS leaders, technical workshops, and networking sessions. Participants had the opportunity to learn about the latest AWS services, best practices in cloud computing, and career opportunities in the tech industry.",
+      "highlights": [
+        "Keynote speeches from AWS leaders",
+        "Technical workshops on AWS services",
+        "Networking sessions with industry professionals",
+        "Career development discussions",
+        "Hands-on labs and demonstrations"
+      ],
+      "report": {
+        "filename": "student-community-day-2024.pdf",
+        "path": "/reports/student-community-day-2024.pdf",
+        "size": "2.4MB",
+        "lastUpdated": "2024-03-20"
+      }
+    },
+    {
+      "id": "2",
+      "title": "TAG Venture",
+      "date": "February 22, 2024",
+      "location": "MIT ADT University",
+      "description": "An innovative event focused on technology, entrepreneurship, and cloud computing, bringing together students and industry experts.",
+      "image": "https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "category": "Innovation",
+      "summary": "TAG Venture was a unique event that combined technology, entrepreneurship, and cloud computing. Hosted at MIT ADT University, the event brought together students, entrepreneurs, and industry experts to explore innovative solutions and business opportunities in the cloud space.",
+      "highlights": [
+        "Startup pitch sessions",
+        "Cloud technology workshops",
+        "Entrepreneurship panel discussions",
+        "Networking with industry leaders",
+        "Innovation challenges"
+      ],
+      "report": {
+        "filename": "tag-venture-2024.pdf",
+        "path": "/reports/tag-venture-2024.pdf",
+        "size": "1.8MB",
+        "lastUpdated": "2024-02-25"
+      }
+    },
+    {
+      "id": "3",
+      "title": "Amazon Community Day - AI/ML Edition",
+      "date": "January 18, 2024",
+      "location": "AWS User Group Pune",
+      "description": "A specialized event focusing on Artificial Intelligence and Machine Learning, featuring workshops, talks, and hands-on sessions.",
+      "image": "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "category": "AI/ML",
+      "summary": "The Amazon Community Day - AI/ML Edition was a specialized event focused on artificial intelligence and machine learning. Hosted by AWS User Group Pune, the event featured expert talks, hands-on workshops, and demonstrations of cutting-edge AI/ML applications using AWS services.",
+      "highlights": [
+        "AI/ML expert talks",
+        "Hands-on workshops with SageMaker",
+        "Real-world AI/ML use cases",
+        "Networking with AI/ML professionals",
+        "Career opportunities in AI/ML"
+      ],
+      "report": {
+        "filename": "community-day-ai-ml-2024.pdf",
+        "path": "/reports/community-day-ai-ml-2024.pdf",
+        "size": "3.1MB",
+        "lastUpdated": "2024-01-20"
+      }
+    }
+  ]
+} 

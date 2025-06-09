@@ -1,39 +1,68 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+const API_BASE_URL = 'http://localhost:3000/api';
+
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  location: string;
+  description: string;
+  image: string;
+  category: string;
+}
+
 const Events: React.FC = () => {
-  const mainEvents = [
-    {
-      id: 1,
-      title: 'Student Community Day 2024',
-      date: 'March 15, 2024',
-      location: 'Virtual',
-      description: 'A day dedicated to bringing together student communities from across the globe to learn, share, and grow together.',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      category: 'Community'
-    },
-    {
-      id: 2,
-      title: 'TAG Venture',
-      date: 'February 22, 2024',
-      location: 'MIT ADT University',
-      description: 'An innovative event focused on technology, entrepreneurship, and cloud computing, bringing together students and industry experts.',
-      image: 'https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      category: 'Innovation'
-    },
-    {
-      id: 3,
-      title: 'Amazon Community Day - AI/ML Edition',
-      date: 'January 18, 2024',
-      location: 'AWS User Group Pune',
-      description: 'A specialized event focusing on Artificial Intelligence and Machine Learning, featuring workshops, talks, and hands-on sessions.',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      category: 'AI/ML'
-    }
-  ];
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/events`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch events');
+        }
+        const data = await response.json();
+        setEvents(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen bg-black">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-white text-xl">Loading events...</div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen bg-black">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="text-red-500 text-xl">Error: {error}</div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-black">
@@ -69,7 +98,7 @@ const Events: React.FC = () => {
         <section className="py-20 bg-gradient-to-b from-blue-900 to-black">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {mainEvents.map(event => (
+              {events.map(event => (
                 <Link 
                   key={event.id} 
                   to={`/events/${event.id}`}

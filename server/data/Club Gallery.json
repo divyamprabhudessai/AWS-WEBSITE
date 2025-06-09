@@ -1,0 +1,34 @@
+{
+  "gallery": [
+    {
+      "id": 1,
+      "url": "/club-gallery/image1.jpg",
+      "alt": "AWS Cloud Club team meeting",
+      "description": "Our team collaborating on cloud projects"
+    },
+    {
+      "id": 2,
+      "url": "/club-gallery/image2.jpg",
+      "alt": "Workshop session",
+      "description": "Students learning AWS services"
+    },
+    {
+      "id": 3,
+      "url": "/club-gallery/image3.jpg",
+      "alt": "Hackathon participants",
+      "description": "Annual cloud hackathon event"
+    },
+    {
+      "id": 4,
+      "url": "/club-gallery/image4.jpg",
+      "alt": "Team celebration",
+      "description": "Celebrating our achievements"
+    },
+    {
+      "id": 5,
+      "url": "/club-gallery/image5.jpg",
+      "alt": "Tech talk session",
+      "description": "Industry expert sharing insights"
+    }
+  ]
+} 

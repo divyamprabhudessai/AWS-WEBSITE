@@ -1,0 +1,75 @@
+{
+  "teamMembers": [
+    { 
+      "name": "Parth Shah", 
+      "role": "Club President", 
+      "image": "/team-images/core-team/Parth_Shah.jpg",
+      "email": "parth.shah@example.com",
+      "linkedin": "https://www.linkedin.com/in/parthss/",
+      "github": "https://github.com/parthss",
+      "description": "Parth is a passionate Software Automation Engineer at SapphireIMS, he is also the cloud club president/captain and is",
+      "experience": [
+        { "title": "AWS Cloud Club", "details": "Leading cloud initiatives and community development" },
+        { "title": "Cloud Projects", "details": "Developing innovative cloud solutions" }
+      ],
+      "skills": ["AWS", "Cloud Computing", "Leadership", "Team Management", "Cloud Architecture", "Project Management"]
+    },
+    { 
+      "name": "Sidkumar Pawar", 
+      "role": "Club Vice President", 
+      "image": "/team-images/core-team/Sidkumar_Pawar.jpg",
+      "email": "sidharthkumarpawar@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/sidkmar/",
+      "github": "https://github.com/sidkumar28",
+      "description": "An experienced cloud architect with a strong background in AWS services. Dedicated to mentoring students and helping them excel in cloud.",
+      "experience": [
+        { "title": "AWS Cloud Club", "details": "Supporting club operations and mentoring members" },
+        { "title": "Cloud Workshops", "details": "Organizing and leading technical workshops" }
+      ],
+      "skills": ["AWS", "Mentorship", "Cloud Architecture", "Workshop Organization", "Teamwork"]
+    },
+    { 
+      "name": "Shambhavi Mishra", 
+      "role": "Club Treasurer", 
+      "image": "/team-images/core-team/Shambhavi_Mishra.jpg",
+      "email": "mshambhavi318@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/shambhavi-mishra-357a1928b/",
+      "github": "https://github.com/shambhavi-318",
+      "description": "Shambhavi Mishra is a Web Development Intern at Prodigy InfoTech. She currently serves as the Treasurer of the AWS Cloud Club at MIT ADT University. Passionate about web development, cloud computing, big data, and UI/UX design, Shambhavi also has a strong command of Java and Advanced Java. She actively works on real-world tech projects and strives to combine creativity with technology to build meaningful digital experiences.",
+      "experience": [
+        { "title": "AWS Cloud Club", "details": "Managing finances and budgeting for events" },
+        { "title": "Event Planning", "details": "Coordinating logistics for club activities" }
+      ],
+      "skills": ["Finance", "Budgeting", "Event Planning", "Cloud Basics", "Organization"]
+    },
+    { 
+      "name": "Tanay Pujara", 
+      "role": "Club Secretary", 
+      "image": "/team-images/core-team/Tanay_Pujara.jpg",
+      "email": "tanay.pujara@example.com",
+      "linkedin": "https://www.linkedin.com/in/tanay-pujara-0286a1233/",
+      "github": "https://github.com/tanay-pujara",
+      "description": "A detail-oriented professional with excellent organizational skills. Coordinates club events and maintains communication between members.",
+      "experience": [
+        { "title": "AWS Cloud Club", "details": "Coordinating meetings and maintaining records" },
+        { "title": "Communication", "details": "Facilitating communication among members" }
+      ],
+      "skills": ["Organization", "Communication", "Record Keeping", "Cloud Basics", "Teamwork"]
+    },
+    { 
+      "name": "Arya Shende", 
+      "role": "Club Community Manager", 
+      "image": "/team-images/core-team/Arya_Shende.jpg",
+      "email": "aryashende27@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/arya-shende-51a16829a/",
+      "github": "https://github.com/sunlixxed",
+      "fiverr": "fiverr.com/lixvocals",
+      "description": "Arya Shende is a sincere Cloud Engineering Intern at ConnectWise LLP. She is also the community manager of AWS Cloub Clubs at MIT ADT University, passionate about cloud, cybersecurity, and graphic design. Arya also works as a freelance designer and social media strategist for global clients.",
+      "experience": [
+        { "title": "AWS Cloud Club", "details": "Building and engaging the club community" },
+        { "title": "Event Hosting", "details": "Hosting and managing club events" }
+      ],
+      "skills": ["Community Building", "Event Hosting", "Networking", "Cloud Basics", "Public Speaking"]
+    }
+  ]
+} 
